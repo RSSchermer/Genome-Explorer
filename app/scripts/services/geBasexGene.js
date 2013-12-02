@@ -2,14 +2,7 @@
 
 angular.module('genomeExplorerApp')
   .factory('geBasexGene', function ($resource) {
-    return $resource('http://localhost:9876/genedata/escherichia_coli/genes/:geneId', {
-      id: '@id',
-      locus: '@locus',
-      summary: '@description',
-      intervalStart: '@seqIntervalStart',
-      intervalStop: '@seqIntervalStop',
-      protein: '@protein'
-    }, {
+    return $resource('http://localhost:9876/restxq/genedata/homo_sapiens/genes/:geneId', null, {
       cache: true
     });
   });

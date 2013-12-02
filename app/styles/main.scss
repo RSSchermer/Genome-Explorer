@@ -1,6 +1,7 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
+@import 'compass/css3';
 
 body {
     padding-top: 20px;
@@ -15,27 +16,29 @@ body {
 
 .header {
     border-bottom: 1px solid #e5e5e5;
+    
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0;
+      line-height: 40px;
+      padding-bottom: 19px;
+    }
 }
 
-.header h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-}
-
-.gene-summary-container h4 {
-  color: #777;
-  margin-bottom: 20px;
-}
-
-.gene-summary-container .row {
-  margin-bottom: 10px;
-}
-
-.gene-summary-container .summary-label {
-  font-weight: bold;
-  text-align: right;
+.gene-summary-container {
+  h3 {
+    color: #777;
+    margin-bottom: 40px;
+  }
+  
+  .row {
+    margin-bottom: 10px;
+  }
+  
+  .summary-label {
+    font-weight: bold;
+    text-align: right;
+  }
 }
 
 .footer {

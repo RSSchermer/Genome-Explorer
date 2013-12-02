@@ -1,0 +1,64 @@
+<div class="row">
+  <form class="form-horizontal" role="form" ng-submit="search()">
+    <div class="form-group">
+      <div class="col-sm-4">
+        <select id="chromosomeSelector" class="form-control" ng-model="chromosomeFilter" ng-change="search()">
+          <option disabled selected value='0'>Chromosome filter</option>
+          <option value='0'>Any chromosome</option>
+          <option value='1'>Chromosome 1</option>
+          <option value='2'>Chromosome 2</option>
+          <option value='3'>Chromosome 3</option>
+          <option value='4'>Chromosome 4</option>
+          <option value='5'>Chromosome 5</option>
+          <option value='6'>Chromosome 6</option>
+          <option value='7'>Chromosome 7</option>
+          <option value='8'>Chromosome 8</option>
+          <option value='9'>Chromosome 9</option>
+          <option value='10'>Chromosome 10</option>
+        </select>
+      </div>
+      <div class="col-sm-6">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search for genes" ng-model="searchQuery">
+        <span class="text-warning" ng-show="searchError">{{searchError}}</span>
+      </div>
+      <div class="col-sm-2">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </form>
+  
+  <div>
+    <button class='btn btn-default' ng-click="previousPage()" ng-disabled="!hasPreviousPage">
+      <span class="glyphicon glyphicon-chevron-left"></span> Previous
+    </button>
+    <button class='btn btn-default' ng-click="nextPage()" ng-disabled="!hasNextPage">
+      Next <span class="glyphicon glyphicon-chevron-right"></span>
+    </button>
+  </div>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Locus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="gene in genes">
+        <td><a href="#/genes/{{gene.symbol}}">{{gene.symbol}}</a></td>
+        <td>{{gene.name}}</td>
+        <td>{{gene.locus}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div>
+    <button class='btn btn-default' ng-click="previousPage()" ng-disabled="!hasPreviousPage">
+      <span class="glyphicon glyphicon-chevron-left"></span> Previous
+    </button>
+    <button class='btn btn-default' ng-click="nextPage()" ng-disabled="!hasNextPage">
+      Next <span class="glyphicon glyphicon-chevron-right"></span>
+    </button>
+  </div>
+</div>

@@ -7,8 +7,12 @@ angular.module('genomeExplorerApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/gene_list.html',
+        controller: 'GeneListCtrl'
+      })
+      .when('/genes', {
+        templateUrl: 'views/gene_list.html',
+        controller: 'GeneListCtrl'
       })
       .when('/genes/:geneId', {
         templateUrl: 'views/gene_summary.html',

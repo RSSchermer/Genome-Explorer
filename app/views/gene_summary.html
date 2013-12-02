@@ -1,35 +1,64 @@
 <div class="dynamic-content-container gene-summary-container">
-  <h4 class="text-muted">Gene {{gene.id}}</h4>
-  <div class="row">
-    <div class="col-md-4 summary-label">
-      Locus:
-    </div>
-    <div class="col-md-8">
-      {{gene.locus}}
-    </div>
+  <div>
+    <a ng-href="#" class="btn btn-default pull-right">Back to list</a>
+    <h3>{{gene.symbol}}: {{gene.name}}</h3>
   </div>
-  <div class="row">
-    <div class="col-md-4 summary-label">
-      Sequence interval:
+  
+  <div class = "well">
+    <div class="row">
+      <div class="col-md-3 summary-label">
+        Locus:
+      </div>
+      
+      <div class="col-md-9">
+        {{gene.locus}}
+      </div>
     </div>
-    <div class="col-md-8">
-      {{gene.intervalStart}} - {{gene.intervalStop}}
+    
+    <div class="row">
+      <div class="col-md-3 summary-label">
+        Type:
+      </div>
+      
+      <div class="col-md-9">
+        {{gene.type}}
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 summary-label">
-      Protein name:
+    
+    <div class="row">
+      <div class="col-md-3 summary-label">
+        Protein name:
+      </div>
+      
+      <div class="col-md-9">
+        {{gene.protein.name}}
+      </div>
     </div>
-    <div class="col-md-8">
-      {{gene.protein.name}}
+    
+    <div class="row">
+      <div class="col-md-3 summary-label">
+        Summary:
+      </div>
+      
+      <div class="col-md-9">
+        {{gene.description}}
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4 summary-label">
-      Summary:
+    
+    <div class="row">
+      <div class="col-md-3 summary-label">
+        Sequence interval:
+      </div>
+      
+      <div class="col-md-9">
+        <span ng-if="gene.intervalStart && gene.intervalStop">
+          {{gene.intervalStart}} - {{gene.intervalStop}} on the <em>{{gene.strand}}</em> strand
+        </span>
+      </div>
     </div>
-    <div class="col-md-8">
-      {{gene.summary}}
+        
+    <div class="row">
+      <span class = "pull-right text-muted">Information last updated on {{gene.updatedAt}}</span>
     </div>
   </div>
 </div>
