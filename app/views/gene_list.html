@@ -3,8 +3,7 @@
     <div class="form-group">
       <div class="col-sm-4">
         <select id="chromosomeSelector" class="form-control" ng-model="chromosomeFilter" ng-change="search()">
-          <option disabled selected value='0'>Chromosome filter</option>
-          <option value='0'>Any chromosome</option>
+          <option value='' selected>Any chromosome</option>
           <option value='1'>Chromosome 1</option>
           <option value='2'>Chromosome 2</option>
           <option value='3'>Chromosome 3</option>
@@ -17,21 +16,24 @@
           <option value='10'>Chromosome 10</option>
         </select>
       </div>
-      <div class="col-sm-6">
-        <input type="text" id="searchInput" class="form-control" placeholder="Search for genes" ng-model="searchQuery">
+      
+      <div class="col-sm-8">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for genes" ng-model="searchQuery">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div>
         <span class="text-warning" ng-show="searchError">{{searchError}}</span>
-      </div>
-      <div class="col-sm-2">
-        <button type="submit" class="btn btn-primary">Search</button>
       </div>
     </div>
   </form>
   
   <div>
-    <button class='btn btn-default' ng-click="previousPage()" ng-disabled="!hasPreviousPage">
+    <button class='btn btn-default' ng-click="currentPage = currentPage - 1" ng-disabled="!hasPreviousPage">
       <span class="glyphicon glyphicon-chevron-left"></span> Previous
     </button>
-    <button class='btn btn-default' ng-click="nextPage()" ng-disabled="!hasNextPage">
+    <button class='btn btn-default' ng-click="currentPage = currentPage + 1" ng-disabled="!hasNextPage">
       Next <span class="glyphicon glyphicon-chevron-right"></span>
     </button>
   </div>
@@ -54,10 +56,10 @@
   </table>
   
   <div>
-    <button class='btn btn-default' ng-click="previousPage()" ng-disabled="!hasPreviousPage">
+    <button class='btn btn-default' ng-click="currentPage = currentPage - 1" ng-disabled="!hasPreviousPage">
       <span class="glyphicon glyphicon-chevron-left"></span> Previous
     </button>
-    <button class='btn btn-default' ng-click="nextPage()" ng-disabled="!hasNextPage">
+    <button class='btn btn-default' ng-click="currentPage = currentPage + 1" ng-disabled="!hasNextPage">
       Next <span class="glyphicon glyphicon-chevron-right"></span>
     </button>
   </div>

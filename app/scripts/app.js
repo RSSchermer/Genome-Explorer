@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('genomeExplorerApp', [
-  'ngResource',
+  'restangular',
   'ngRoute'
 ])
+  .constant('GENES_PER_PAGE', 15)
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/gene_list.html',
-        controller: 'GeneListCtrl'
+        redirectTo: '/genes'
       })
       .when('/genes', {
         templateUrl: 'views/gene_list.html',
@@ -20,5 +20,29 @@ angular.module('genomeExplorerApp', [
       })
       .otherwise({
         redirectTo: '/'
+      });
+  })
+  .config(function (RestangularProvider) {
+    RestangularProvider
+      .setBaseUrl('http://localhost:9876/restxq/genedata/homo_sapiens')
+      .setDefaultHttpFields({cache: true})
+      .setResponseExtractor(function(response, operation) {
+        var newResponse;
+        
+        if (operation === 'getList') {
+          newResponse = response.results;
+          newResponse.metadata = {
+            count: response.count
+          };
+        } else {
+          newResponse = response.results;
+        }
+        
+        return newResponse;
+      })
+      .addElementTransformer('genes', false, function(gene) {
+        gene.addRestangularMethod('getExons', 'get', 'exons');
+         
+        return gene;
       });
   });

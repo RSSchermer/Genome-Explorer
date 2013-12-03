@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('genomeExplorerApp')
-  .controller('GeneCtrl', function ($scope, $routeParams, geBasexGene) {
+  .controller('GeneCtrl', function ($scope, $routeParams, Restangular) {
     if (null !== $routeParams.geneId) {
-      $scope.gene = geBasexGene.get({geneId: $routeParams.geneId});
+      Restangular.one('genes', $routeParams.geneId).get().then(function (gene) {
+        $scope.gene = gene;
+      });
     }
   });

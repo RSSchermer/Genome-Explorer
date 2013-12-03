@@ -1,58 +1,34 @@
 'use strict';
 
 angular.module('genomeExplorerApp')
-  .controller('GeneListCtrl', function ($scope, $cacheFactory, geBasexGene) {
-    var genesPerPage = 15;
-    var cachedState = $cacheFactory.get('geneListStateCache') || $cacheFactory('geneListStateCache');
-    var pageNum = cachedState.get('page') || 1;
-    var chromosomeFilter = cachedState.get('chromosomeFilter') || 0;
-    var searchQuery = cachedState.get('searchQuery');
+  .controller('GeneListCtrl', function ($scope, $cacheFactory, Restangular, GENES_PER_PAGE) {
+    var self = this,
+        cache = $cacheFactory.get('geneListStateCache') || $cacheFactory('geneListStateCache');
     
-    /**
-     * Helper function for retrieving gene list for page and updating scope
-     * @param {Object} scope   The scope to be updated
-     * @param {Int}    pageNum The page number
-     */
-    var loadPage = function (scope, pageNum, chromosomeId, searchQuery) {
-      geBasexGene.query({
-          top: genesPerPage,
-          skip: (pageNum - 1) * genesPerPage,
+    this.loadPage = function (scope, pageNum, chromosomeId, searchQuery) {
+      Restangular.all('genes').getList({
+          top: GENES_PER_PAGE,
+          skip: (pageNum - 1) * GENES_PER_PAGE,
           chromosome: chromosomeId,
           search: searchQuery
-        },
-        function (genes) {
+        }).then(function (genes) {
           scope.genes = genes;
-          scope.hasNextPage = genes.length >= genesPerPage;
+          scope.hasNextPage = genes.metadata.count > pageNum * GENES_PER_PAGE;
           scope.hasPreviousPage = pageNum !== 1;
         }
       );
     };
     
     // Setup controller scope
-    $scope.chromosomeFilter = chromosomeFilter;
-    $scope.searchQuery = searchQuery;
+    $scope.currentPage = cache.get('page') || 1;
+    $scope.chromosomeFilter = cache.get('chromosomeFilter');
+    $scope.searchQuery = cache.get('searchQuery');
     
-    loadPage($scope, pageNum, chromosomeFilter, searchQuery);
-    
-    $scope.nextPage = function () {
-      if ($scope.hasNextPage) {
-        pageNum++;
-        
-        cachedState.put('page', pageNum);
-        
-        loadPage($scope, pageNum, chromosomeFilter, searchQuery);
-      }
-    };
-    
-    $scope.previousPage = function () {
-      if ($scope.hasPreviousPage) {
-        pageNum--;
-        
-        cachedState.put('page', pageNum);
-        
-        loadPage($scope, pageNum, chromosomeFilter, searchQuery);
-      }
-    };
+    $scope.$watch('currentPage', function () {
+      cache.put('page', $scope.currentPage);
+      
+      self.loadPage($scope, $scope.currentPage, $scope.chromosomeFilter, $scope.searchQuery);
+    });
     
     $scope.search = function () {
       var queryLength = $scope.searchQuery ? $scope.searchQuery.length : 0;
@@ -60,17 +36,16 @@ angular.module('genomeExplorerApp')
       if (queryLength !== 0 && queryLength < 4) {
         $scope.searchError = 'Search query must be at least 4 characters long.';
       } else {
+        $scope.currentPage = 1;
         $scope.searchError = null;
         
-        pageNum = 1;
-        chromosomeFilter = $scope.chromosomeFilter;
-        searchQuery = $scope.searchQuery;
+        cache.put('page', $scope.currentPage);
+        cache.put('chromosomeFilter', $scope.chromosomeFilter);
+        cache.put('searchQuery', $scope.searchQuery);
         
-        cachedState.put('page', 1);
-        cachedState.put('chromosomeFilter', chromosomeFilter);
-        cachedState.put('searchQuery', searchQuery);
-        
-        loadPage($scope, pageNum, chromosomeFilter, searchQuery);
+        self.loadPage($scope, $scope.currentPage, $scope.chromosomeFilter, $scope.searchQuery);
       }
     };
+    
+    self.loadPage($scope, $scope.currentPage, $scope.chromosomeFilter, $scope.searchQuery);
   });
