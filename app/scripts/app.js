@@ -15,11 +15,11 @@ angular.module('genomeExplorerApp', [
         redirectTo: '/genes'
       })
       .when('/genes', {
-        templateUrl: '/views/gene_list.html',
+        templateUrl: 'views/gene_list.html',
         controller: 'GeneListCtrl'
       })
       .when('/genes/:geneId', {
-        templateUrl: '/views/gene.html',
+        templateUrl: 'views/gene.html',
         controller: 'GeneCtrl'
       })
       .otherwise({

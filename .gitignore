@@ -1,6 +1,7 @@
 node_modules
 dist
 data
+target
 .tmp
 .sass-cache
 app/bower_components
