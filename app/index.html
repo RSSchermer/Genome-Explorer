@@ -12,10 +12,12 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <!-- build:css({.tmp,app}) styles/main.css -->
+        <link rel="stylesheet" href="bower_components/glider/src/css/style.css">
+        <link rel="stylesheet" href="bower_components/bootstrap-tour/build/css/bootstrap-tour.css">
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
-</head>
-  <body ng-app="genomeExplorerApp">
+  </head>
+  <body ng-app="genomeExplorerApp" ng-controller="MainCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -28,7 +30,8 @@
     <div class = "container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
+          <li class="active"><a ng-href="/">Home</a></li>
+          <li><a ng-href="#" id="tour-start" ng-click="startTour()">Tour</a></li>
           <li><a ng-href="#">About</a></li>
         </ul>
         <h3 class="text-muted">Genome Explorer</h3>
@@ -51,21 +54,33 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-
+    
+    <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-
+        
+        <!-- build:js scripts/plugins.js -->
+        <script src="bower_components/spin.js/dist/spin.js"></script>
+        <script src="bower_components/sass-bootstrap/js/tooltip.js"></script>
+        <script src="bower_components/sass-bootstrap/js/popover.js"></script>
+        <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.js"></script>
+        <!-- endbuild -->
+        
         <!-- build:js scripts/modules.js -->
-        <script src="bower_components/lodash/lodash.js"></script>
         <script src="bower_components/restangular/dist/restangular.js"></script>
         <script src="bower_components/angular-route/angular-route.js"></script>
-        <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+        <script src="bower_components/angular-spinner/angular-spinner.js"></script>
+        <script src="bower_components/glider/glider.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/geneList.js"></script>
         <script src="scripts/controllers/gene.js"></script>
+        <script src="scripts/services/d3Loader.js"></script>
+        <script src="scripts/services/angularTour.js"></script>
+        <script src="scripts/directives/geneSequenceDiagram.js"></script>
         <!-- endbuild -->
-</body>
+  </body>
 </html>

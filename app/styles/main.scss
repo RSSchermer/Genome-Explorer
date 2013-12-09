@@ -1,7 +1,6 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
 
 @import 'sass-bootstrap/lib/bootstrap';
-@import 'compass/css3';
 
 .input-group {
     input.form-control {
@@ -33,6 +32,20 @@ body {
       line-height: 40px;
       padding-bottom: 19px;
     }
+}
+
+.gene-select-filters {
+  .row {
+    margin-bottom: 7px;
+    
+    &:first-child {
+      margin-top: 7px;
+    }
+  }
+}
+
+.no-genes-placeholder {
+  height: 250px;
 }
 
 .gene-summary-container {
@@ -71,5 +84,15 @@ body {
 
     .header {
         margin-bottom: 30px;
+    }
+    
+    .gene-select-filters {
+      .row:first-child {
+        margin-top: 0;
+      }
+      
+      .row:last-child {
+        margin-bottom: 0;
+      }
     }
 }

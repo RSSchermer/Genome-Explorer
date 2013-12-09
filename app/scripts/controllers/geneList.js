@@ -1,33 +1,38 @@
 'use strict';
 
 angular.module('genomeExplorerApp')
-  .controller('GeneListCtrl', function ($scope, $cacheFactory, Restangular, GENES_PER_PAGE) {
-    var self = this,
-        cache = $cacheFactory.get('geneListStateCache') || $cacheFactory('geneListStateCache');
+  .controller('GeneListCtrl', function ($scope, $routeParams, Restangular, $location, GENES_PER_PAGE) {
+    var self = this;
     
-    this.loadPage = function (scope, pageNum, chromosomeId, searchQuery) {
-      Restangular.all('genes').getList({
-          top: GENES_PER_PAGE,
-          skip: (pageNum - 1) * GENES_PER_PAGE,
-          chromosome: chromosomeId,
-          search: searchQuery
-        }).then(function (genes) {
-          scope.genes = genes;
-          scope.hasNextPage = genes.metadata.count > pageNum * GENES_PER_PAGE;
-          scope.hasPreviousPage = pageNum !== 1;
-        }
-      );
-    };
+    $scope.genesPerPage = GENES_PER_PAGE;
+    $scope.currentPage = parseInt($routeParams.page) || 1;
+    $scope.chromosomeFilter = $routeParams.chromosome;
+    $scope.geneTypeFilter = $routeParams.type;
+    $scope.searchQuery = $routeParams.search;
     
-    // Setup controller scope
-    $scope.currentPage = cache.get('page') || 1;
-    $scope.chromosomeFilter = cache.get('chromosomeFilter');
-    $scope.searchQuery = cache.get('searchQuery');
+    $scope.$emit('readyForTour', true);
     
+    Restangular.all('chromosomes').getList().then(function (chromosomes) {
+      $scope.chromosomes = chromosomes;
+    });
+    
+    Restangular.all('genes').getList({
+        top: GENES_PER_PAGE,
+        skip: ($scope.currentPage - 1) * GENES_PER_PAGE,
+        chromosome: $scope.chromosomeFilter,
+        type: $scope.geneTypeFilter,
+        search: $scope.searchQuery
+      }).then(function (genes) {
+        $scope.genes = genes;
+        $scope.hasNextPage = genes.metadata.count > $scope.currentPage * GENES_PER_PAGE;
+        $scope.hasPreviousPage = $scope.currentPage !== 1;
+        
+        $scope.genesLoaded = true;
+      }
+    );
+        
     $scope.$watch('currentPage', function () {
-      cache.put('page', $scope.currentPage);
-      
-      self.loadPage($scope, $scope.currentPage, $scope.chromosomeFilter, $scope.searchQuery);
+      $location.search(self._buildSearch($scope.currentPage, $scope.chromosomeFilter, $scope.geneTypeFilter, $scope.searchQuery));
     });
     
     $scope.search = function () {
@@ -36,16 +41,25 @@ angular.module('genomeExplorerApp')
       if (queryLength !== 0 && queryLength < 4) {
         $scope.searchError = 'Search query must be at least 4 characters long.';
       } else {
-        $scope.currentPage = 1;
-        $scope.searchError = null;
-        
-        cache.put('page', $scope.currentPage);
-        cache.put('chromosomeFilter', $scope.chromosomeFilter);
-        cache.put('searchQuery', $scope.searchQuery);
-        
-        self.loadPage($scope, $scope.currentPage, $scope.chromosomeFilter, $scope.searchQuery);
+        $location.search(self._buildSearch(1, $scope.chromosomeFilter, $scope.geneTypeFilter, $scope.searchQuery));
       }
     };
     
-    self.loadPage($scope, $scope.currentPage, $scope.chromosomeFilter, $scope.searchQuery);
+    this._buildSearch = function (page, chromosomeId, geneType, searchQuery) {
+      var search = {page: page};
+      
+      if (chromosomeId) {
+        search.chromosome = chromosomeId;
+      }
+      
+      if (geneType) {
+        search.type = geneType;
+      }
+      
+      if (searchQuery) {
+        search.search = searchQuery;
+      }
+      
+      return search;
+    };
   });

@@ -9,7 +9,10 @@
     "sass-bootstrap": "~3.0.0",
     "restangular": "~1.1.8",
     "angular-route": "~1.2.0",
-    "angular-bootstrap": "~0.7.0"
+    "d3": "~3.3.11",
+    "angular-spinner": "~0.2.1",
+    "glider": "~0.1.5",
+    "bootstrap-tour": "~0.7.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

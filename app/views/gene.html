@@ -1,10 +1,14 @@
 <div class="dynamic-content-container gene-summary-container">
   <div>
-    <a ng-href="#" class="btn btn-default pull-right">Back to list</a>
-    <h3>{{gene.symbol}}: {{gene.name}}</h3>
+    <button class="btn btn-default pull-right" ng-click="backToList()">Back to list</button>
+    <h3 id="gene-profile-title">{{gene.symbol}}: {{gene.name}}</h3>
   </div>
   
   <div class = "well">
+    <div class="row">
+      <span class = "pull-right text-muted">Information last updated on {{gene.updatedAt}}</span>
+    </div>
+    
     <div class="row">
       <div class="col-md-3 summary-label">
         Locus:
@@ -44,21 +48,14 @@
         {{gene.description}}
       </div>
     </div>
-    
-    <div class="row">
-      <div class="col-md-3 summary-label">
-        Sequence interval:
-      </div>
-      
-      <div class="col-md-9">
-        <span ng-if="gene.intervalStart && gene.intervalStop">
-          {{gene.intervalStart}} - {{gene.intervalStop}} on the <em>{{gene.strand}}</em> strand
-        </span>
-      </div>
-    </div>
-        
-    <div class="row">
-      <span class = "pull-right text-muted">Information last updated on {{gene.updatedAt}}</span>
-    </div>
+  </div>
+  
+  <div ng-if="sequence">
+    <h4>Sequence:</h4> 
+    <p>{{gene.intervalStop - gene.intervalStart}} base pairs on the {{gene.strand}} strand</p>
+    <b>Zoom:</b> <slider min="0" max="1" step="0.2" value="zoom"></slider>
+    <div style="overflow-x: scroll; margin-top: 40px;">
+      <gene-sequence-diagram gene="gene" plus-sequence="sequence" zoom="zoom"></gene-sequence-diagram>
+    </div>  
   </div>
 </div>

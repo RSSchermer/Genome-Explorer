@@ -2,8 +2,12 @@
 
 angular.module('genomeExplorerApp', [
   'restangular',
-  'ngRoute'
+  'ngRoute',
+  'angularSpinner',
+  'glider'
 ])
+  .constant('GENEDATA_SERVER_PATH', 'http://localhost:9876/restxq/genedata/homo_sapiens')
+  .constant('SEQUENCE_SERVER_PATH', 'http://localhost:5000/sequencedata/homo_sapiens/chromosome/')
   .constant('GENES_PER_PAGE', 15)
   .config(function ($routeProvider) {
     $routeProvider
@@ -11,20 +15,20 @@ angular.module('genomeExplorerApp', [
         redirectTo: '/genes'
       })
       .when('/genes', {
-        templateUrl: 'views/gene_list.html',
+        templateUrl: '/views/gene_list.html',
         controller: 'GeneListCtrl'
       })
       .when('/genes/:geneId', {
-        templateUrl: 'views/gene_summary.html',
+        templateUrl: '/views/gene.html',
         controller: 'GeneCtrl'
       })
       .otherwise({
         redirectTo: '/'
       });
   })
-  .config(function (RestangularProvider) {
+  .config(function (RestangularProvider, GENEDATA_SERVER_PATH) {
     RestangularProvider
-      .setBaseUrl('http://localhost:9876/restxq/genedata/homo_sapiens')
+      .setBaseUrl(GENEDATA_SERVER_PATH)
       .setDefaultHttpFields({cache: true})
       .setResponseExtractor(function(response, operation) {
         var newResponse;
