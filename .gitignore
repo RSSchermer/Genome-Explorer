@@ -3,6 +3,8 @@ data
 target
 .git
 .project
+.travis.yml
+.editorconfig
 .tmp
 .sass-cache
 app/bower_components
