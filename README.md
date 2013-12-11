@@ -19,8 +19,9 @@ gene data is not included in the git repository and a RAR archive of the data
 can be downloaded [here]().
 Extract the archive into the root directory where you cloned/extracted the
 repository. Assuming _mvn_ and _node_ were added to the PATH (the node installer
-should add node to the path automatically, Maven needs to be added manually),
-entering the following commands in terminal should start the servers:
+should add node to the path automatically, Maven needs to be added 
+[manually](http://stackoverflow.com/questions/3402214/windows-7-maven-2-install)
+), entering the following commands in terminal should start the servers:
     
 	$ cd path/to/repository
 	$ mvn jetty:run & node sequence_server.js
@@ -108,4 +109,13 @@ for the [Grunt Taskrunner](http://gruntjs.com/), a standard
 [.htaccess](/app/.htaccess) Apache webserver configuration file and a standard
 [404-page](/app/404.html). It was also used to generate Angular controller 
 files, service files and directive files, which creates empty templates and
-reduces time spend on writing boilerplate code. 
+reduces time spend on writing boilerplate code. Files there were - appart from
+the scaffold template - largely written by us are:
+
+- [app/index.html](/app/index.html)
+- [app/scripts/*](/app/scripts/) (all files in all subdirectories)
+- [app/styles/main.scss](/app/styles/main.scss)
+- [app/views](/app/views) (all files)
+- [restxq/homo_sapiens.xqm](/restxq/homo_sapiens.xqm)
+- [sequence_server.js](/sequence_server.js)
+
