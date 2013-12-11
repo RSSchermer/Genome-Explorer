@@ -12,11 +12,13 @@ angular.module('genomeExplorerApp')
           $scope.gene.exons = exons;
         });
         
-        $http.get(SEQUENCE_SERVER_PATH + gene.chromosomeId +'?start='+ gene.intervalStart + '&stop='+ gene.intervalStop)
-          .then(function (res) {
-            $scope.sequence = res.data;
-          }
-        );
+        if (gene.intervalStart && gene.intervalStop) {
+          $http.get(SEQUENCE_SERVER_PATH + gene.chromosomeId +'?start='+ gene.intervalStart + '&stop='+ gene.intervalStop)
+            .then(function (res) {
+              $scope.sequence = res.data;
+            }
+          );
+        }
         
         $scope.$emit('readyForTour', true);
       });

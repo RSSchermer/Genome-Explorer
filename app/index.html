@@ -10,9 +10,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-        <!-- build:css({.tmp,app}) styles/main.css -->
+        
         <link rel="stylesheet" href="bower_components/glider/src/css/style.css">
+        <!-- build:css({.tmp,app}) styles/main.css -->
         <link rel="stylesheet" href="bower_components/bootstrap-tour/build/css/bootstrap-tour.css">
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
@@ -30,9 +30,9 @@
     <div class = "container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="/">Home</a></li>
+          <li ng-class="{active: isCurrentPath('/genes')}"><a ng-href="#/genes">Home</a></li>
           <li><a ng-href="#" id="tour-start" ng-click="startTour()">Tour</a></li>
-          <li><a ng-href="#">About</a></li>
+          <li ng-class="{active: isCurrentPath('/about')}"><a ng-href="#/about">About</a></li>
         </ul>
         <h3 class="text-muted">Genome Explorer</h3>
       </div>
@@ -40,7 +40,7 @@
       <div ng-view=""></div>
       
       <div class="footer">
-    
+        Course project by Alexander Wong, Kim Steenis, Tinka Bakker and Roland Schermer
       </div>
     </div>
 

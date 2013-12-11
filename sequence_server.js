@@ -10,7 +10,8 @@ var app = express();
  * Transforms sequence intervals into fasta file positions and passes them on to a callback.
  * 
  * Transforms a sequence interval into fasta file positions, correcting for the fasta header
- * at the top of the file, newlines after 70 bases and for sequence starting at 1 instead of 0.
+ * at the top of the file, newlines after 70 bases, for sequence starting at 1 instead of 0
+ * and for the interval stop being "up to" instead of "up to and including".
  * 
  * @param {Integer}  sequenceStart Starting coordinate of dna sequence
  * @param {Integer}  sequenceStop  Stopping coordinate of dna sequence
@@ -20,6 +21,7 @@ var app = express();
  */
 var sequenceIntervalToFileInterval = function (sequenceStart, sequenceStop, filePath, callback) {
   var sequenceStartPos = 0;
+  var sequenceLineLength = 70;
   
   new Lazy(fs.createReadStream(filePath))
     .lines
@@ -30,8 +32,10 @@ var sequenceIntervalToFileInterval = function (sequenceStart, sequenceStop, file
     }).forEach(function (line) {
       sequenceStartPos += line.toString().length + 1;
     }).on('pipe', function () {
-      var fileStartPos = sequenceStart + Math.floor(sequenceStart / 70) + sequenceStartPos - 1;
-      var fileStopPos = sequenceStop + Math.floor(sequenceStop / 70) + sequenceStartPos - 1;
+      var fileStartPos = sequenceStart + Math.floor(sequenceStart / sequenceLineLength) + sequenceStartPos - 1;
+      fileStartPos = sequenceStart % sequenceLineLength === 0 ? fileStartPos - 1 : fileStartPos;
+      var fileStopPos = sequenceStop + Math.floor(sequenceStop / sequenceLineLength) + sequenceStartPos - 2;
+      fileStopPos = sequenceStop % sequenceLineLength === 0 ? fileStopPos - 1 : fileStopPos;
       
       callback(fileStartPos, fileStopPos);
     });

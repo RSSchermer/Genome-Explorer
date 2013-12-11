@@ -22,6 +22,9 @@ angular.module('genomeExplorerApp', [
         templateUrl: 'views/gene.html',
         controller: 'GeneCtrl'
       })
+      .when('/about', {
+        templateUrl: 'views/about.html'
+      })
       .otherwise({
         redirectTo: '/'
       });

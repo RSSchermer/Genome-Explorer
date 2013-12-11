@@ -6,7 +6,7 @@
  : @author Roland Schermer
  :)
 
-module namespace page = 'http://basex.org/modules/web-page';
+module namespace GE = 'http://basex.org/modules/web-page';
 
 (:~
  : Returns list of chromosomes.
@@ -17,7 +17,7 @@ declare
   %output:method("json")
   %rest:path("/genedata/homo_sapiens/chromosomes")
   %rest:GET
-  function page:showChromosomes()
+  function GE:showChromosomes()
 {
   let $db := db:open('homo_sapiens')
   
@@ -57,7 +57,7 @@ declare
   %rest:query-param("chromosome", "{$chromosomeId}")
   %rest:query-param("type", "{$geneType}")
   %rest:query-param("search", "{$searchQuery}")
-  function page:showGenes($skip as xs:integer, $top as xs:integer?, $chromosomeId as xs:string?, $geneType as xs:integer?, $searchQuery as xs:string?)
+  function GE:showGenes($skip as xs:integer, $top as xs:integer?, $chromosomeId as xs:string?, $geneType as xs:integer?, $searchQuery as xs:string?)
 {
   let $db := db:open('homo_sapiens')
   
@@ -101,8 +101,9 @@ declare
   (:
    : Apply search query filter.
    :)
+  let $tokens := tokenize($searchQuery, '\s')
   let $genes := if(not(empty($searchQuery)) and not($searchQuery = '')) then
-                  $genes[contains(symbol, $searchQuery) or contains(name, $searchQuery) or contains(locus, $searchQuery)]
+                  $genes[GE:contains-all(symbol, $tokens) or GE:contains-all(name, $tokens) or GE:contains-all(locus, $tokens) or GE:contains-all(summary, $tokens)]
                 else
                   $genes
   
@@ -125,7 +126,7 @@ declare
   let $entries := for $gene in $pagedGenes
                   where not(empty($gene/symbol))
                   return
-                    page:buildGeneXML($gene)
+                    GE:buildGeneXML($gene)
   
   return
     <json type='object' objects='gene protein' arrays='results'>
@@ -147,7 +148,7 @@ declare
   %output:method("json")
   %rest:path("/genedata/homo_sapiens/genes/{$symbol}")
   %rest:GET
-  function page:showGene($symbol as xs:string)
+  function GE:showGene($symbol as xs:string)
 {
   let $db := db:open('homo_sapiens')
   
@@ -156,7 +157,7 @@ declare
   return
     <json type='object' objects='results protein'>
       <results>
-        {page:buildGeneXML($gene)/node()}
+        {GE:buildGeneXML($gene)/node()}
       </results>
     </json>
 };
@@ -172,7 +173,7 @@ declare
   %output:method("json")
   %rest:path("/genedata/homo_sapiens/genes/{$symbol}/exons")
   %rest:GET
-  function page:showGeneExons($symbol as xs:string)
+  function GE:showGeneExons($symbol as xs:string)
 {
   let $db := db:open('homo_sapiens')
   
@@ -195,13 +196,27 @@ declare
 };
 
 (:~
+ : Determines whether all of a set of needle strings are contained in another haystack string.
+ :
+ : @param $arg           Haystack
+ : @param $searchStrings Needles
+ :
+ : @returns Boolean true if all needles are contained in haystack, false otherwise
+ :)
+declare function GE:contains-all ($arg as xs:string?, $searchStrings as xs:string*) as xs:boolean 
+{
+   every $searchString in $searchStrings
+   satisfies contains($arg,$searchString)
+};
+
+(:~
  : Helper function for constructing the response XML for a certain gene.
  :
  : @param $gene Raw gene element from database.
  :
  : @return Transformed gene element suitable for JSON serialization
  :)
-declare function page:buildGeneXML($gene)
+declare function GE:buildGeneXML($gene)
 {
   <gene>
     <accessionCode>{$gene/@accession/data()}</accessionCode>

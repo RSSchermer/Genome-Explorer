@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('genomeExplorerApp')
-  .controller('MainCtrl', function ($scope, $cacheFactory, AngularTour) {
+  .controller('MainCtrl', function ($scope, AngularTour, $location) {
     var explorerTour = AngularTour.create();
     
     explorerTour.addSteps([
@@ -63,5 +63,9 @@ angular.module('genomeExplorerApp')
       explorerTour.end();
       explorerTour.restart();
       explorerTour.start(true);
+    };
+    
+    $scope.isCurrentPath = function (path) {
+      return $location.path() === path;
     };
   });

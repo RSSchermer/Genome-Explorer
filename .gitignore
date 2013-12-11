@@ -1,7 +1,7 @@
 node_modules
-dist
 data
 target
+.git
 .tmp
 .sass-cache
 app/bower_components

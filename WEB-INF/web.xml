@@ -5,8 +5,20 @@
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   version="2.5"
   metadata-complete="true">
-
+  
   <display-name>XForms Webapp Stub</display-name>
+  
+  <!-- URL rewrite -->
+  <filter>
+    <filter-name>UrlRewriteFilter</filter-name>
+    <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>UrlRewriteFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
 
   <session-config>
     <!-- 24 hours timeout -->
@@ -103,6 +115,7 @@
   </filter-mapping>
   -->
   
+  <!--  Cross origin headers -->
   <filter>
     <filter-name>cross-origin</filter-name>
     <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>

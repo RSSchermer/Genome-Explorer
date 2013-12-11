@@ -85,6 +85,11 @@
       <version>6.0</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.tuckey</groupId>
+      <artifactId>urlrewritefilter</artifactId>
+      <version>4.0.3</version>
+    </dependency>
   </dependencies>
   <pluginRepositories>
     <pluginRepository>

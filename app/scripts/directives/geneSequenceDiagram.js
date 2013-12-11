@@ -22,12 +22,12 @@ angular.module('genomeExplorerApp')
             G: 'C'
           };
         
-        var rnaExonColor = attrs.ranExonColor || '#CCC';
-        var peptideExonColor = attrs.petideExonColor || '#999';
+        var exonColor = attrs.exonColor || '#AAA';
+        var plusStrandColor = attrs.plusStrandColor || '#EB2F32';
+        var minusStrandColor = attrs.minusStrandColor || '#3C36EB';
         
         d3Loader.load().then(function (d3) {
-          var svg = d3.select(element[0])
-                      .append('svg');
+          var svg = d3.select(element[0]).append('svg');
           
           window.onresize = function() {
             scope.$apply();
@@ -79,7 +79,7 @@ angular.module('genomeExplorerApp')
               zoom = zoom === null || zoom === undefined ? 1 : Math.pow(zoom, 6);
               
               var geneIntervalStart = parseInt(gene.intervalStart);
-              var geneIntervalStop = parseInt(gene.intervalStop) + 1;
+              var geneIntervalStop = parseInt(gene.intervalStop);
               var geneIntervalLength = geneIntervalStop - geneIntervalStart;
               
               svg.selectAll('*').remove();
@@ -92,7 +92,7 @@ angular.module('genomeExplorerApp')
                 .text(plusSequence)
                 .attr('font-family', 'monospace')
                 .attr('font-size', 20)
-                .attr('fill', 'red')
+                .attr('fill', plusStrandColor)
                 .attr('y', 40);
               
               if (!minDiagramWidth) {
@@ -106,15 +106,13 @@ angular.module('genomeExplorerApp')
               }
               
               svg.style('width', minDiagramWidth + (maxDiagramWidth - minDiagramWidth) * zoom +'px');
-                      
-              console.log(plusSequence.length +' '+ geneIntervalLength);
               
               if (Number(zoom) === 1) {
                 svg.append('text')
                   .text(minusSequence)
                   .attr('font-family', 'monospace')
                   .attr('font-size', 20)
-                  .attr('fill', 'blue')
+                  .attr('fill', minusStrandColor)
                   .attr('y', 63);
               } else {
                 sequenceText.remove();
@@ -126,7 +124,7 @@ angular.module('genomeExplorerApp')
                 .attr('x1', 0)
                 .attr('x2', svg.node().offsetWidth)
                 .attr('stroke-width', 5)
-                .attr('stroke', 'red');
+                .attr('stroke', plusStrandColor);
               
               svg.append('line')
                 .attr('y1', 70)
@@ -134,14 +132,14 @@ angular.module('genomeExplorerApp')
                 .attr('x1', 0)
                 .attr('x2', svg.node().offsetWidth)
                 .attr('stroke-width', 5)
-                .attr('stroke', 'blue');
+                .attr('stroke', minusStrandColor);
               
               svg.append('text')
                 .text('Plus strand')
                 .attr('font-family', 'sans-serif')
                 .attr('font-size', 15)
                 .attr('font-weight', 'bold')
-                .attr('fill', 'red')
+                .attr('fill', plusStrandColor)
                 .attr('y', 12)
                 .attr('x', 3);
               
@@ -150,7 +148,7 @@ angular.module('genomeExplorerApp')
                 .attr('font-family', 'sans-serif')
                 .attr('font-size', 15)
                 .attr('font-weight', 'bold')
-                .attr('fill', 'blue')
+                .attr('fill', minusStrandColor)
                 .attr('y', 89)
                 .attr('x', 3);
               
@@ -173,9 +171,7 @@ angular.module('genomeExplorerApp')
                   return (parseInt(exon.intervalStart) - geneIntervalStart) /
                     geneIntervalLength * svg.node().offsetWidth;
                 })
-                .attr('fill', function (exon) {
-                  return exon.product === 'peptide' ? peptideExonColor : rnaExonColor;
-                })
+                .attr('fill', exonColor)
                 .attr('title', 'Exon')
                 .append('svg:title')
                 .text(function (exon) {
