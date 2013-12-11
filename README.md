@@ -115,7 +115,13 @@ the scaffold template - largely written by us are:
 - [app/index.html](/app/index.html)
 - [app/scripts/*](/app/scripts/) (all files in all subdirectories)
 - [app/styles/main.scss](/app/styles/main.scss)
-- [app/views](/app/views) (all files)
+- [app/views/*](/app/views) (all files)
 - [restxq/homo_sapiens.xqm](/restxq/homo_sapiens.xqm)
 - [sequence_server.js](/sequence_server.js)
 
+[app/scripts/services/d3Loader.js](/app/scripts/services/d3Loader.js) and
+[app/scripts/directives/geneSequenceDiagram.js](/app/scripts/directives/geneSequenceDiagram.js)
+used some code from
+[this AngularJS newsletter](http://www.ng-newsletter.com/posts/d3-on-angular.html)
+with a tutorial on using D3JS and AngularJS together. No other significant
+attributions.
