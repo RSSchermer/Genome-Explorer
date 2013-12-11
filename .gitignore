@@ -2,6 +2,7 @@ node_modules
 data
 target
 .git
+.project
 .tmp
 .sass-cache
 app/bower_components
