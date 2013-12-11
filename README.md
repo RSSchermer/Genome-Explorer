@@ -2,10 +2,10 @@
 
 ## Table of Contents
 
-- [1. Installation instructons](#1-installation-instructons)
-- 2. Building the application
-- 3. Third party dependencies
-- 4. Application code
+- 1. [Installation instructons](#1-installation-instructions)
+- 2. [Building the application](#2-building-the-application)
+- 3. [Third party dependencies](#3-third-party-dependencies)
+- 4. [Application code](#4-application-code)
 
 ## 1. Installation instructions
 Prerequisites:
