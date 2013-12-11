@@ -1,6 +1,13 @@
 # Genome Explorer - SE Course Project
 
-## Installation instructions
+## Table of Contents
+
+- 1. Installation instructons
+- 2. Building the application
+- 3. Third party dependencies
+- 4. Application code
+
+## 1. Installation instructions
 Prerequisites:
 
 - [Apache Maven](http://maven.apache.org/download.cgi) needs to be installed
@@ -24,7 +31,7 @@ developped mainly using Google Chrome for testing, but was briefly tested in the
 latest Mozilla Firefox and Internet explorer 10 and should work properly in both
 browsers.
 
-## Building the application
+## 2. Building the application
 Instead of running the production files as described above, you can also build
 from source in case you want to make any changes to the code.
 
@@ -45,13 +52,13 @@ start a server and open a browser using the raw source files. Data still needs
 to be downloaded as described in the _installation_ section. The Jetty server
 and sequence_server are also started in the same way as described in the
 _installation_ section. `$ grunt build` should rebuild the application is the
-`dist` directory. If you are using the Jetty server to serve the static files
+`/dist` directory. If you are using the Jetty server to serve the static files
 the icon images will be broken, because the application will be served from the
 `/dist` instead of the root directory and I was unable to get the URL rewrite
 rules working properly. This can be fixed with a "replace all" on the style
 sheet: `/bower_components` --> `/dist/bower_components`.
 
-## Third party dependencies
+## 3. Third party dependencies
 The main top level production dependencies of the frontend javascript
 application are:
 
@@ -86,9 +93,19 @@ along with the development dependencies.
 
 Finally, we used [Basex](http://basex.org/) both as the XML database containing 
 the gene data and to build a rest API to communicate the data to the frontend
-application using Basex's [restXQ]() module. This module defines a set of
-annotations which can be used on xQuery function declarations to link them to
-specific routes. These annotations are then interpretted by the restXQ servlet.
+application using Basex's [restXQ](http://docs.basex.org/wiki/RESTXQ) module.
+This module defines a set of annotations which can be used on xQuery function
+declarations to link them to specific routes. These annotations are then
+interpretted by the restXQ servlet. We used the 
+[Basex Blog example](https://github.com/siserle/blog-example) as a starting
+point.
 
-## Code written by us
-
+## 4. Application code
+An Angular application scaffold was generated using the
+[Yeoman Angular generator](https://github.com/yeoman/generator-angular), which
+provided us with a minimal skeleton application, including configuration files
+for the [Grunt Taskrunner](http://gruntjs.com/), a standard 
+[.htaccess](/app/.htaccess) Apache webserver configuration file and a standard
+[404-page](/app/404.html). It was also used to generate Angular controller 
+files, service files and directive files, which creates empty templates and
+reduces time spend on writing boilerplate code. 
