@@ -1,0 +1,38 @@
+{
+  "name": "glider",
+  "main": [
+    "glider.js",
+    "glider.min.js",
+    "src/css/**/*"
+  ],
+  "version": "0.1.5",
+  "authors": [
+    "Valentin Valve Vasilyev <iamvalentin@gmail.com>",
+    "Dmitry KODer Karpunin <koderfunk@gmail.com>"
+  ],
+  "description": "AngularJS UI slider",
+  "keywords": [
+    "angular",
+    "slider",
+    "ui"
+  ],
+  "dependencies": {
+    "angular": "1.2.1"
+  },
+  "license": "MIT",
+  "homepage": "http://github.com/evrone/glider",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "_release": "0.1.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.1.5",
+    "commit": "43c21f984d2ef06cc71e79132b558e2eefa6b506"
+  },
+  "_source": "git://github.com/evrone/glider.git",
+  "_target": "~0.1.5",
+  "_originalSource": "glider"
+}

@@ -1,0 +1,90 @@
+<div>
+  <form class="form-horizontal" role="form" ng-submit="search()">
+    <div class="form-group">
+      <div class="col-sm-4 gene-select-filters">
+        <div class="row">
+          <div class="col-sm-12">
+            <select id="chromosome-filter" class="form-control" ng-model="chromosomeFilter" ng-options="chromosome.id as chromosome.name for chromosome in chromosomes" ng-change="search()">
+              <option value="" selected="selected">Any chromosome</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <select id="gene-type-filter" class="form-control" ng-model="geneTypeFilter" ng-change="search()">
+              <option value="" selected="selected">Any gene type</option>
+              <option value="6">Protein coding</option>
+              <option value="1">tRNA</option>
+              <option value="2">rRNA</option>
+              <option value="3">snRNA</option>
+              <option value="5">snoRNA</option>
+              <option value="10">ncRNA</option>
+              <option value="7">Pseudo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-sm-8">
+        <div class="input-group">
+          <input type="text" id="search-query-input" class="form-control" placeholder="Search for genes" ng-model="searchQuery">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div>
+        <span class="text-warning" ng-show="searchError">{{searchError}}</span>
+      </div>
+    </div>
+  </form>
+  
+  <div>
+    <div class="btn-group">
+      <button class="btn btn-default" ng-click="currentPage = currentPage - 1" ng-disabled="!hasPreviousPage">
+        <span class="glyphicon glyphicon-chevron-left"></span> Previous
+      </button>
+      
+      <button class="btn btn-default" ng-click="currentPage = currentPage + 1" ng-disabled="!hasNextPage">
+        Next <span class="glyphicon glyphicon-chevron-right"></span>
+      </button>
+    </div>
+    
+    <span class="text-muted pull-right" ng-show="genesLoaded" style="line-height: 34px">
+      Showing {{genesPerPage * (currentPage - 1) + 1}}-{{genesPerPage * (currentPage - 1) + genes.length}} of {{genes.metadata.count}} genes
+    </span>
+  </div>
+  
+  <table id="gene-list-table" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Locus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="gene in genes" ng-show="genesLoaded">
+        <td><a href="#/genes/{{gene.symbol}}">{{gene.symbol}}</a></td>
+        <td>{{gene.name}}</td>
+        <td>{{gene.locus}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="no-genes-placeholder" us-spinner="{radius: 40, length: 30, width: 8}" ng-hide="genesLoaded"></div>
+  
+  <div class="container no-genes-placeholder text-center" ng-show="genesLoaded && genes.length == 0">
+    No genes were found for your query. Please use more general terms.
+  </div>
+  
+  <div>
+    <div class="btn-group">
+      <button class="btn btn-default" ng-click="currentPage = currentPage - 1" ng-disabled="!hasPreviousPage">
+        <span class="glyphicon glyphicon-chevron-left"></span> Previous
+      </button>
+      
+      <button class="btn btn-default" ng-click="currentPage = currentPage + 1" ng-disabled="!hasNextPage">
+        Next <span class="glyphicon glyphicon-chevron-right"></span>
+      </button>
+    </div>
+  </div>
+</div>
