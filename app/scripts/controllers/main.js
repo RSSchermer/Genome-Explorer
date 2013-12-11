@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('genomeExplorerApp')
-  .controller('MainCtrl', function ($scope, AngularTour, $location) {
+  .controller('MainCtrl', function ($scope, AngularTour) {
     var explorerTour = AngularTour.create();
     
     explorerTour.addSteps([
@@ -52,6 +52,14 @@ angular.module('genomeExplorerApp')
         content: 'This page provides more information about one particular gene. It will be shown after you ' +
           'click on a gene\'s symbol on the search page. In this case information for the "ACADM" gene is shown.',
         placement: 'top'
+      },
+      {
+        path: '/genes/ACADM',
+        element: '#gene-diagram-zoom-slider',
+        title: 'Gene description',
+        content: 'The diagram below shows the genes sequence and the exon distribution. This slider can be used ' +
+          'to zoom out, giving a better overview of the position of the exons.',
+        placement: 'top'
       }
     ]);
     
@@ -63,9 +71,5 @@ angular.module('genomeExplorerApp')
       explorerTour.end();
       explorerTour.restart();
       explorerTour.start(true);
-    };
-    
-    $scope.isCurrentPath = function (path) {
-      return $location.path() === path;
     };
   });

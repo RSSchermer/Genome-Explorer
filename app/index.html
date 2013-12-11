@@ -29,7 +29,7 @@
     
     <div class = "container">
       <div class="header">
-        <ul class="nav nav-pills pull-right">
+        <ul class="nav nav-pills pull-right" ng-controller="NavigationCtrl">
           <li ng-class="{active: isCurrentPath('/genes')}"><a ng-href="#/genes">Home</a></li>
           <li><a ng-href="#" id="tour-start" ng-click="startTour()">Tour</a></li>
           <li ng-class="{active: isCurrentPath('/about')}"><a ng-href="#/about">About</a></li>
@@ -76,6 +76,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/navigation.js"></script>
         <script src="scripts/controllers/geneList.js"></script>
         <script src="scripts/controllers/gene.js"></script>
         <script src="scripts/services/d3Loader.js"></script>

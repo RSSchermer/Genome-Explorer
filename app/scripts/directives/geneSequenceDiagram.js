@@ -95,17 +95,22 @@ angular.module('genomeExplorerApp')
                 .attr('fill', plusStrandColor)
                 .attr('y', 40);
               
+              sequenceText.append('svg:title')
+                .text('Plus strand');
+              
               if (!minDiagramWidth) {
                 svg.style('width', '100%');
                 
-                minDiagramWidth = svg.node().offsetWidth;
+                minDiagramWidth = svg.node().parentNode.offsetWidth;
               }
               
               if (!maxDiagramWidth) {
                 maxDiagramWidth = sequenceText.node().getComputedTextLength();
               }
               
-              svg.style('width', minDiagramWidth + (maxDiagramWidth - minDiagramWidth) * zoom +'px');
+              var svgWidth = minDiagramWidth + (maxDiagramWidth - minDiagramWidth) * zoom;
+              
+              svg.style('width', svgWidth +'px');
               
               if (Number(zoom) === 1) {
                 svg.append('text')
@@ -113,7 +118,9 @@ angular.module('genomeExplorerApp')
                   .attr('font-family', 'monospace')
                   .attr('font-size', 20)
                   .attr('fill', minusStrandColor)
-                  .attr('y', 63);
+                  .attr('y', 63)
+                  .append('svg:title')
+                  .text('Minus strand');
               } else {
                 sequenceText.remove();
               }
@@ -122,7 +129,7 @@ angular.module('genomeExplorerApp')
                 .attr('y1', 20)
                 .attr('y2', 20)
                 .attr('x1', 0)
-                .attr('x2', svg.node().offsetWidth)
+                .attr('x2', svgWidth)
                 .attr('stroke-width', 5)
                 .attr('stroke', plusStrandColor);
               
@@ -130,35 +137,77 @@ angular.module('genomeExplorerApp')
                 .attr('y1', 70)
                 .attr('y2', 70)
                 .attr('x1', 0)
-                .attr('x2', svg.node().offsetWidth)
+                .attr('x2', svgWidth)
                 .attr('stroke-width', 5)
                 .attr('stroke', minusStrandColor);
               
-              svg.append('text')
-                .text('Plus strand')
-                .attr('font-family', 'sans-serif')
-                .attr('font-size', 15)
-                .attr('font-weight', 'bold')
+              svg.append('rect')
+                .attr('height', 14)
+                .attr('width', 24)
+                .attr('y', 1)
+                .attr('x', 0)
                 .attr('fill', plusStrandColor)
-                .attr('y', 12)
-                .attr('x', 3);
+                .append('svg:title')
+                .text('Legend');
               
               svg.append('text')
-                .text('Minus strand')
+                .text('Plus Strand')
                 .attr('font-family', 'sans-serif')
-                .attr('font-size', 15)
+                .attr('font-size', 12)
+                .attr('fill', plusStrandColor)
                 .attr('font-weight', 'bold')
-                .attr('fill', minusStrandColor)
-                .attr('y', 89)
-                .attr('x', 3);
+                .attr('y', 13)
+                .attr('x', 29)
+                .append('svg:title')
+                .text('Legend');
               
+              svg.append('rect')
+                .attr('height', 14)
+                .attr('width', 24)
+                .attr('y', 1)
+                .attr('x', 110)
+                .attr('fill', minusStrandColor)
+                .append('svg:title')
+                .text('Legend');
+              
+              svg.append('text')
+                .text('Minus Strand')
+                .attr('font-family', 'sans-serif')
+                .attr('font-size', 12)
+                .attr('fill', minusStrandColor)
+                .attr('font-weight', 'bold')
+                .attr('y', 13)
+                .attr('x', 139)
+                .append('svg:title')
+                .text('Legend');
+              
+              svg.append('rect')
+                .attr('height', 14)
+                .attr('width', 24)
+                .attr('y', 1)
+                .attr('x', 230)
+                .attr('fill', exonColor)
+                .append('svg:title')
+                .text('Legend');
+              
+              svg.append('text')
+                .text('Exon')
+                .attr('font-family', 'sans-serif')
+                .attr('font-size', 12)
+                .attr('fill', exonColor)
+                .attr('font-weight', 'bold')
+                .attr('y', 13)
+                .attr('x', 259)
+                .append('svg:title')
+                .text('Legend');
+                
               exonRectGroup.selectAll('rect')
                 .data(gene.exons).enter()
                 .append('rect')
                 .attr('height', 23)
                 .attr('width', function (exon) {
                   return Math.ceil((parseInt(exon.intervalStop) - parseInt(exon.intervalStart)) /
-                    geneIntervalLength * svg.node().offsetWidth);
+                    geneIntervalLength * svgWidth);
                 })
                 .attr('y', function (exon) {
                   if (exon.strand === 'plus') {
@@ -169,7 +218,7 @@ angular.module('genomeExplorerApp')
                 })
                 .attr('x', function (exon) {
                   return (parseInt(exon.intervalStart) - geneIntervalStart) /
-                    geneIntervalLength * svg.node().offsetWidth;
+                    geneIntervalLength * svgWidth;
                 })
                 .attr('fill', exonColor)
                 .attr('title', 'Exon')

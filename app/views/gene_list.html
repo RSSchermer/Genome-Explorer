@@ -48,7 +48,7 @@
       </button>
     </div>
     
-    <span class="text-muted pull-right" ng-show="genesLoaded" style="line-height: 34px;">
+    <span class="text-muted pull-right gene-page-info" ng-show="genesLoaded">
       Showing {{genesPerPage * (currentPage - 1) + 1}}-{{genesPerPage * (currentPage - 1) + genes.length}} of {{genes.metadata.count}} genes
     </span>
   </div>

@@ -44,6 +44,15 @@ body {
   }
 }
 
+.gene-page-info {
+  line-height: 34px;
+}
+
+.gene-diagram-container {
+  overflow-x: scroll;
+  margin-top: 40px;
+}
+
 .no-genes-placeholder {
   height: 250px;
 }
@@ -60,7 +69,6 @@ body {
   
     .summary-label {
         font-weight: bold;
-        text-align: right;
     }
 }
 
@@ -94,5 +102,9 @@ body {
       .row:last-child {
         margin-bottom: 0;
       }
+    }
+    
+    .summary-label {
+        text-align: right;
     }
 }

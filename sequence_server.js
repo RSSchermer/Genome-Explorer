@@ -75,7 +75,7 @@ app.get('/sequencedata/homo_sapiens/chromosome/:chromosomeId', function(req, res
       passStream(newLineFilter),
       res
     ).then(function () {
-      console.log('Succesfully streamed sequence '+ start +'-'+ stop +'.');
+      console.log('Succesfully streamed sequence '+ start +'-'+ stop +' on chromosome '+ req.params.chromosomeId +'.');
     });
   });
 });

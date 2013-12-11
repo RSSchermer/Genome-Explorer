@@ -14,20 +14,21 @@ Prerequisites:
 - [Node.js](http://nodejs.org/download/) needs to be installed
 
 Clone the repository or download the 
-[zipball](http://github.com/rsschermer/genome-explorer/zipball/master). The
-gene data is not included in the git repository and a RAR archive of the data
-can be downloaded [here]().
-Extract the archive into the root directory where you cloned/extracted the
-repository. Assuming _mvn_ and _node_ were added to the PATH (the node installer
-should add node to the path automatically, Maven needs to be added 
-[manually](http://stackoverflow.com/questions/3402214/windows-7-maven-2-install)
-), entering the following commands in terminal should start the servers:
+[zipball](http://github.com/rsschermer/genome-explorer/zipball/master) and
+extract it somewhere. The gene data is not included in the git repository and a
+RAR archive of the data (first 10 chromosomes only) can be downloaded 
+[here](http://www.filedropper.com/data). Extract the archive into the root
+directory where you cloned/extracted the repository. Assuming _mvn_ and _node_
+were added to the PATH (the node installer should add node to the path
+automatically, Maven needs to be added
+[manually](http://stackoverflow.com/a/3402257)), entering the following commands
+in terminal should start the servers:
     
 	$ cd path/to/repository
 	$ mvn jetty:run & node sequence_server.js
 
-The application should now show up if you open a browser and go to
-[localhost:9000/dist/](http://localhost:9000/dist/). The application was
+After Maven is finished the application should now up if you open a browser and 
+go to [localhost:9000/dist/](http://localhost:9000/dist/). The application was
 developped mainly using Google Chrome for testing, but was briefly tested in the
 latest Mozilla Firefox and Internet explorer 10 and should work properly in both
 browsers.
@@ -113,7 +114,7 @@ reduces time spend on writing boilerplate code. Files there were - appart from
 the scaffold template - largely written by us are:
 
 - [app/index.html](/app/index.html)
-- [app/scripts/*](/app/scripts/) (all files in all subdirectories)
+- [app/scripts/*](/app/scripts/) (all files, including all subdirectories)
 - [app/styles/main.scss](/app/styles/main.scss)
 - [app/views/*](/app/views) (all files)
 - [restxq/homo_sapiens.xqm](/restxq/homo_sapiens.xqm)
