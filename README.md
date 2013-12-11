@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- 1. Installation instructons
+- [1. Installation instructons](#1-installation-instructons)
 - 2. Building the application
 - 3. Third party dependencies
 - 4. Application code
