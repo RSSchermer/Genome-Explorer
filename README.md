@@ -22,17 +22,24 @@ directory where you cloned/extracted the repository. Assuming _mvn_ and _node_
 were added to the PATH (the node installer should add node to the path
 automatically, Maven needs to be added
 [manually](http://stackoverflow.com/a/3402257)), entering the following commands
-in terminal should start the servers:
+in a bash(-like) shell should start the servers:
     
 	$ cd path/to/repository
+	$ npm install --production
 	$ mvn jetty:run & node sequence_server.js
 
-After Maven is finished setting up the server (it should say '[INFO] Started 
-Jetty Server' after a while) the application should now show up if you open a 
-browser and go to [localhost:9876/dist/](http://localhost:9876/dist/).
-The application was developped mainly using Google Chrome for testing, but was
-briefly tested in the latest version of Mozilla Firefox and in Internet explorer
-10 and should work properly in both browsers.
+The second line will install the production dependencies for the
+sequence_server. The third line will start the servers. When using windows
+command prompt, for the third line you may have to open two seperate prompts,
+navigate both to the directory where the application was cloned/extracted and
+in the first enter `mvn jetty:run`, in the second enter
+`node sequence_server.js`. After Maven is finished setting up the server (it
+should say '[INFO] Started Jetty Server' after a while) the application should
+now show up if you open a browser and go to
+[localhost:9876/dist/](http://localhost:9876/dist/). The application was
+developped mainly using Google Chrome for testing, but was briefly tested in the
+latest version of Mozilla Firefox and in Internet explorer 10 and should work
+properly in both browsers.
 
 ## 2. Building the application
 Instead of running the production files as described above, you can also build
@@ -42,9 +49,10 @@ Prerequisites:
 
 - [Node.js](http://nodejs.org/download/) needs to be installed
 - [Bower](http://bower.io) needs to be installed
-- Grunt should be installed: `$ npm install -g grunt-cli`
+- Grunt should be installed: `$ npm install -g grunt-cli` in bash or command
+  prompt
 
-Run the following commands in a terminal:
+Run the following commands in a bash(-like) shell or windows command prompt:
 
 	$ cd path/to/repository
 	$ npm install
