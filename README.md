@@ -115,7 +115,7 @@ for the [Grunt Taskrunner](http://gruntjs.com/), a standard
 files, Angular service files and Angular directive files, which creates empty
 skeletons based of predefined templates and reduces time spend on writing
 boilerplate code. Files that were - appart from the scaffold skeleton - largely
-written by us are:
+written by us:
 
 - [app/index.html](/app/index.html)
 - [app/scripts/*](/app/scripts/) (all files, including all subdirectories)
