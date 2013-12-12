@@ -16,7 +16,7 @@ Prerequisites:
 Clone the repository or download the 
 [zipball](http://github.com/rsschermer/genome-explorer/zipball/master) and
 extract it somewhere. The gene data is not included in the git repository and a
-RAR archive of the data (first 10 chromosomes only) can be downloaded 
+RAR archive of the data - first 10 chromosomes only - can be downloaded 
 [here](http://www.filedropper.com/data). Extract the archive into the root
 directory where you cloned/extracted the repository. Assuming _mvn_ and _node_
 were added to the PATH (the node installer should add node to the path
@@ -37,7 +37,7 @@ in the first enter `mvn jetty:run`, in the second enter
 should say '[INFO] Started Jetty Server' after a while) the application should
 now show up if you open a browser and go to
 [localhost:9876/dist/](http://localhost:9876/dist/). The application was
-developped mainly using Google Chrome for testing, but was briefly tested in the
+developed mainly using Google Chrome for testing, but was briefly tested in the
 latest version of Mozilla Firefox and in Internet explorer 10 and should work
 properly in both browsers.
 
