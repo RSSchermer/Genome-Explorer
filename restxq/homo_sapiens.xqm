@@ -17,7 +17,7 @@ declare
   %output:method("json")
   %rest:path("/genedata/homo_sapiens/chromosomes")
   %rest:GET
-  function GE:showChromosomes()
+  function GE:getChromosomes()
 {
   let $db := db:open('homo_sapiens')
   
@@ -57,7 +57,7 @@ declare
   %rest:query-param("chromosome", "{$chromosomeId}")
   %rest:query-param("type", "{$geneType}")
   %rest:query-param("search", "{$searchQuery}")
-  function GE:showGenes($skip as xs:integer, $top as xs:integer?, $chromosomeId as xs:string?, $geneType as xs:integer?, $searchQuery as xs:string?)
+  function GE:getGenes($skip as xs:integer, $top as xs:integer?, $chromosomeId as xs:string?, $geneType as xs:integer?, $searchQuery as xs:string?)
 {
   let $db := db:open('homo_sapiens')
   
@@ -148,7 +148,7 @@ declare
   %output:method("json")
   %rest:path("/genedata/homo_sapiens/genes/{$symbol}")
   %rest:GET
-  function GE:showGene($symbol as xs:string)
+  function GE:getGene($symbol as xs:string)
 {
   let $db := db:open('homo_sapiens')
   
@@ -173,7 +173,7 @@ declare
   %output:method("json")
   %rest:path("/genedata/homo_sapiens/genes/{$symbol}/exons")
   %rest:GET
-  function GE:showGeneExons($symbol as xs:string)
+  function GE:getGeneExons($symbol as xs:string)
 {
   let $db := db:open('homo_sapiens')
   

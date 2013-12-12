@@ -28,7 +28,7 @@ in terminal should start the servers:
 	$ mvn jetty:run & node sequence_server.js
 
 After Maven is finished the application should now up if you open a browser and 
-go to [localhost:9000/dist/](http://localhost:9000/dist/). The application was
+go to [localhost:9876/dist/](http://localhost:9876/dist/). The application was
 developped mainly using Google Chrome for testing, but was briefly tested in the
 latest Mozilla Firefox and Internet explorer 10 and should work properly in both
 browsers.

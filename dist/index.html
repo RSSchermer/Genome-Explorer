@@ -10,8 +10,9 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-        <link rel="stylesheet" href="styles/e59a8549.main.css"/>
+        
+        <link rel="stylesheet" href="bower_components/glider/src/css/style.css">
+        <link rel="stylesheet" href="styles/ca8b7ef5.main.css"/>
   </head>
   <body ng-app="genomeExplorerApp" ng-controller="MainCtrl">
     <!--[if lt IE 7]>
@@ -25,10 +26,10 @@
     
     <div class="container">
       <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="/">Home</a></li>
+        <ul class="nav nav-pills pull-right" ng-controller="NavigationCtrl">
+          <li ng-class="{active: isCurrentPath('/genes')}"><a ng-href="#/genes">Home</a></li>
           <li><a ng-href="#" id="tour-start" ng-click="startTour()">Tour</a></li>
-          <li><a ng-href="#">About</a></li>
+          <li ng-class="{active: isCurrentPath('/about')}"><a ng-href="#/about">About</a></li>
         </ul>
         <h3 class="text-muted">Genome Explorer</h3>
       </div>
@@ -36,7 +37,7 @@
       <div ng-view=""></div>
       
       <div class="footer">
-    
+        Course project by Alexander Wong, Kim Steenis, Tinka Bakker and Roland Schermer
       </div>
     </div>
 
@@ -51,14 +52,14 @@
        ga('send', 'pageview');
     </script>
     
-    <script src="bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
         
-        <script src="scripts/a93084d1.plugins.js"></script>
+        <script src="scripts/abc32f33.plugins.js"></script>
         
         <script src="scripts/75838266.modules.js"></script>
 
-        <script src="scripts/ec1271bb.scripts.js"></script>
+        <script src="scripts/bfefa9c9.scripts.js"></script>
   </body>
 </html>

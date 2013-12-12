@@ -53,8 +53,8 @@
   <div ng-if="sequence">
     <h4>Sequence:</h4> 
     <p>{{gene.intervalStop - gene.intervalStart}} base pairs on the {{gene.strand}} strand</p>
-    <b>Zoom:</b> <slider min="0" max="1" step="0.2" value="zoom"></slider>
-    <div style="overflow-x: scroll; margin-top: 40px">
+    <b>Zoom:</b> <slider id="gene-diagram-zoom-slider" min="0" max="1" step="0.2" value="zoom"></slider>
+    <div class="gene-diagram-container">
       <gene-sequence-diagram gene="gene" plus-sequence="sequence" zoom="zoom"></gene-sequence-diagram>
     </div>  
   </div>
