@@ -27,11 +27,12 @@ in terminal should start the servers:
 	$ cd path/to/repository
 	$ mvn jetty:run & node sequence_server.js
 
-After Maven is finished the application should now up if you open a browser and 
-go to [localhost:9876/dist/](http://localhost:9876/dist/). The application was
-developped mainly using Google Chrome for testing, but was briefly tested in the
-latest Mozilla Firefox and Internet explorer 10 and should work properly in both
-browsers.
+After Maven is finished setting up the server (it should say '[INFO] Started 
+Jetty Server' after a while) the application should now show up if you open a 
+browser and go to [localhost:9876/dist/](http://localhost:9876/dist/).
+The application was developped mainly using Google Chrome for testing, but was
+briefly tested in the latest version of Mozilla Firefox and in Internet explorer
+10 and should work properly in both browsers.
 
 ## 2. Building the application
 Instead of running the production files as described above, you can also build
@@ -52,29 +53,30 @@ Run the following commands in a terminal:
 This should have downloaded all third party libraries. `$ grunt serve` will
 start a server and open a browser using the raw source files. Data still needs
 to be downloaded as described in the _installation_ section. The Jetty server
-and sequence_server are also started in the same way as described in the
-_installation_ section. `$ grunt build` should rebuild the application is the
-`/dist` directory. If you are using the Jetty server to serve the static files
-the icon images will be broken, because the application will be served from the
-`/dist` instead of the root directory and I was unable to get the URL rewrite
-rules working properly. This can be fixed with a "replace all" on the style
-sheet: `/bower_components` --> `/dist/bower_components`.
+and sequence_server also have to be started in the same way as described in the
+_installation_ section. `$ grunt build` should rebuild the frontend javascript
+minified and concatenated production code in the `/dist` directory. If you are
+using the Jetty server to serve the static files the icon images will be broken,
+because the application will be served from the `/dist` instead of the root
+directory and I was unable to get the URL rewrite rules working properly. This
+can be fixed with a "replace all" on the style sheet: `/bower_components` -->
+`/dist/bower_components`.
 
 ## 3. Third party dependencies
 The main top level production dependencies of the frontend javascript
 application are:
 
-- [AngularJS](http://angularjs.org) web application framework core
-- [Restangular](https://github.com/mgonto/restangular) angular module for 
+- [AngularJS](http://angularjs.org): web application framework core
+- [Restangular](https://github.com/mgonto/restangular): angular module for 
   interaction with a backend rest API
-- [SASS Bootstrap](https://github.com/jlong/sass-bootstrap), the SASS version
+- [SASS Bootstrap](https://github.com/jlong/sass-bootstrap): the SASS version
   of the Twitter Bootstrap css framework
-- [D3js](http://d3js.org/) data visualisation with svg images
-- [Bootstrap Tour](http://bootstraptour.com/), feature tour of an application
+- [D3js](http://d3js.org/): data visualisation with svg images
+- [Bootstrap Tour](http://bootstraptour.com/): feature tour of an application
   using Bootstrap's tooltips and popovers
-- [Angular-Spinner](https://github.com/urish/angular-spinner), angular css 
+- [Angular-Spinner](https://github.com/urish/angular-spinner): angular css 
   spinner directive used to indicate when something is loading
-- [Glider](https://github.com/evrone/glider), angular slider directive
+- [Glider](https://github.com/evrone/glider): angular slider directive
 
 For a complete list of top level dependencies, have a look at the
 [bower.json](/bower.json) file or install bower and run `$ bower install` as
@@ -83,11 +85,12 @@ application into `/app/bower_components`.
 
 The top level production dependencies of the node sequence_server are:
 
-- [Express](http://expressjs.com/) node application framework
-- [Lazy](https://github.com/pkrumins/node-lazy), allows using streams as lists
-- [Pass-stream](https://github.com/jeffbski/pass-stream), transformation of
+- [Express](http://expressjs.com/): node application framework
+- [Lazy](https://github.com/pkrumins/node-lazy): allows treating streams as
+  lists
+- [Pass-stream](https://github.com/jeffbski/pass-stream): easy transformation of
   stream data
-- [PromisePipe](https://github.com/epeli/node-promisepipe), easier success or
+- [PromisePipe](https://github.com/epeli/node-promisepipe): easier success or
   failure handling for stream piping
 
 These dependencies are also listed in the [package.json](/package.json) file,
@@ -109,9 +112,10 @@ provided us with a minimal skeleton application, including configuration files
 for the [Grunt Taskrunner](http://gruntjs.com/), a standard 
 [.htaccess](/app/.htaccess) Apache webserver configuration file and a standard
 [404-page](/app/404.html). It was also used to generate Angular controller 
-files, service files and directive files, which creates empty templates and
-reduces time spend on writing boilerplate code. Files there were - appart from
-the scaffold template - largely written by us are:
+files, Angular service files and Angular directive files, which creates empty
+skeletons based of predefined templates and reduces time spend on writing
+boilerplate code. Files that were - appart from the scaffold skeleton - largely
+written by us are:
 
 - [app/index.html](/app/index.html)
 - [app/scripts/*](/app/scripts/) (all files, including all subdirectories)
