@@ -7,7 +7,7 @@ angular.module('genomeExplorerApp', [
   'glider'
 ])
   .constant('GENEDATA_SERVER_PATH', 'http://localhost:9876/restxq/genedata/homo_sapiens')
-  .constant('SEQUENCE_SERVER_PATH', 'http://localhost:5000/sequencedata/homo_sapiens/chromosome/')
+  .constant('SEQUENCE_SERVER_PATH', 'http://localhost:9875/sequencedata/homo_sapiens/chromosome/')
   .constant('GENES_PER_PAGE', 15)
   .config(function ($routeProvider) {
     $routeProvider

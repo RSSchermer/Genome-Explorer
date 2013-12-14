@@ -1,4 +1,5 @@
 # Genome Explorer - SE Course Project
+[Demo available here.](http://tressa.eu:9876/dist/)
 
 ## Table of Contents
 

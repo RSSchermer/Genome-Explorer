@@ -49,7 +49,7 @@ var newLineFilter = function (data, encoding, cb) {
 };
 
 app.get('/sequencedata/homo_sapiens/chromosome/:chromosomeId', function(req, res){
-  var sequenceFilePath = 'C:/Users/Roland/Workspace/GenomeExplorer/data/homo_sapiens/sequences/chr'+ 
+  var sequenceFilePath = './data/homo_sapiens/sequences/chr'+ 
     req.params.chromosomeId +'.fa';
   var start = Number(req.query.start);
   var stop = Number(req.query.stop);
@@ -80,6 +80,6 @@ app.get('/sequencedata/homo_sapiens/chromosome/:chromosomeId', function(req, res
   });
 });
 
-app.listen(5000, function() {
-  console.log("Listening on 5000");
+app.listen(9875, function() {
+  console.log("Listening on 9875");
 });
